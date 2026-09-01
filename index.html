@@ -20,8 +20,24 @@
           const ctx = canvas.getContext("2d");
           ctx.font = "50px Arial";
 
+          var letter_counts = 0;
+          var x_coord = 50;
+          var y_coord = 50;
+
           window.addEventListener("keydown", function (event) {
-            ctx.fillText(event.key, 10, 40);
+            if (event.key.length == 1) { // it's a letter key
+              if (letter_counts < 5) { // not all full yet
+                ctx.fillText(event.key, x_coord, y_coord);
+                x_coord += 50
+                letter_counts += 1;
+              }
+            }
+
+            else if (event.key === "Enter" && letter_counts === 5) { // submit the word
+              letter_counts = 0;
+              x_coord = 50;
+              y_coord += 50;
+            }
           })
 
 
