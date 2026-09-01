@@ -2,8 +2,9 @@
 <html>
     <head>
         <style>
+            @import url('https://fonts.googleapis.com/css2?family=LINE+Seed+JP&display=swap');
             /* We remove margins and hide overflow to make the canvas fill the entire screen */
-            html, body { margin: 0; height: 100%; overflow: hidden; }
+            html, body { margin: 0; height: 100%; overflow: hidden; font-family: 'LINE Seed JP'; }
             /* We set the canvas to block display and take up 100% of the viewport width and height */
             canvas { display: block; width: 100vw; height: 100vh; }
         </style>
@@ -18,16 +19,19 @@
           canvas.height = window.innerHeight;
 
           const ctx = canvas.getContext("2d");
-          ctx.font = "50px Arial";
+          ctx.font = "50px Line Seed JP";
 
           var letter_counts = 0;
           var x_coord = 50;
           var y_coord = 50;
 
+          var guess = "";
+
           window.addEventListener("keydown", function (event) {
             if (event.key.length == 1) { // it's a letter key
               if (letter_counts < 5) { // not all full yet
-                ctx.fillText(event.key, x_coord, y_coord);
+                guess += event.key;
+                ctx.fillText(event.key.toUpperCase(), x_coord, y_coord);
                 x_coord += 50
                 letter_counts += 1;
               }
@@ -37,6 +41,20 @@
               letter_counts = 0;
               x_coord = 50;
               y_coord += 50;
+
+              // evaluate the guess here
+            }
+
+            else if (event.key === "Backspace" && letter_counts > 0){
+              ctx.rect(x_coord - 5, y_coord + 10, -50, -60)
+              ctx.fillStyle = "white";
+              ctx.fill();
+
+              ctx.fillStyle = "black"; // reset
+
+              guess = guess.slice(0, -1);
+              letter_counts -= 1;
+              x_coord -= 50;
             }
           })
 
