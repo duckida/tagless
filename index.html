@@ -11,7 +11,19 @@
 
     <body>
         <canvas id="canvas"></canvas>
+
         <script>
+          const canvas = document.getElementById("canvas");
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+
+          const ctx = canvas.getContext("2d");
+          ctx.font = "50px Arial";
+
+          window.addEventListener("keydown", function (event) {
+            ctx.fillText(event.key, 10, 40);
+          })
+
 
         </script>
     </body>
