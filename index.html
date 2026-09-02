@@ -26,6 +26,7 @@
           var y_coord = 50;
 
           var guess = "";
+          let target = "ocean"
 
           window.addEventListener("keydown", function (event) {
             if (event.key.length == 1) { // it's a letter key
@@ -38,15 +39,43 @@
             }
 
             else if (event.key === "Enter" && letter_counts === 5) { // submit the word
+              let check_x_coord = 50;
+              // evaluate the guess here
+              //
+              for (var index = 0; index < 5; index++) {
+                let letter_val = guess[index]; // the guess value of that letter
+
+                ctx.beginPath();
+                ctx.rect(check_x_coord - 5, y_coord + 10, 50, -60)
+
+                if (letter_val == target[index]) {
+                  ctx.fillStyle = "green";
+                }
+                else if (target.includes(letter_val)) {
+                  ctx.fillStyle = "yellow";
+                }
+                else {
+                  ctx.fillStyle = "gray";
+                }
+
+                ctx.fill();
+
+                ctx.fillStyle = "white";
+                ctx.fillText(letter_val.toUpperCase(), check_x_coord, y_coord);
+
+                check_x_coord += 50;
+                ctx.fillStyle = "black";
+              }
+
+              guess = "";
+
               letter_counts = 0;
               x_coord = 50;
-              y_coord += 50;
-
-              // evaluate the guess here
+              y_coord += 60;
             }
 
             else if (event.key === "Backspace" && letter_counts > 0){
-              ctx.rect(x_coord - 5, y_coord + 10, -50, -60)
+              ctx.rect(x_coord - 5, y_coord + 10, -50, -50)
               ctx.fillStyle = "white";
               ctx.fill();
 
@@ -55,6 +84,7 @@
               guess = guess.slice(0, -1);
               letter_counts -= 1;
               x_coord -= 50;
+
             }
           })
 
