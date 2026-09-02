@@ -33,6 +33,7 @@
           window.addEventListener("keydown", function (event) {
             if (event.key.length == 1) { // it's a letter key
               if (letter_counts < 5) { // not all full yet
+                ctx.beginPath();
                 guess += event.key;
                 ctx.fillText(event.key.toUpperCase(), x_coord, y_coord);
                 x_coord += 50
@@ -77,6 +78,7 @@
             }
 
             else if (event.key === "Backspace" && letter_counts > 0){
+              ctx.beginPath();
               ctx.rect(x_coord - 5, y_coord + 10, -50, -50)
               ctx.fillStyle = "white";
               ctx.fill();
