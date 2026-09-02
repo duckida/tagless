@@ -49,13 +49,13 @@
                 ctx.rect(check_x_coord - 5, y_coord + 10, 50, -60)
 
                 if (letter_val == target[index]) {
-                  ctx.fillStyle = "green";
+                  ctx.fillStyle = "#0f9d58";
                 }
                 else if (target.includes(letter_val)) {
-                  ctx.fillStyle = "yellow";
+                  ctx.fillStyle = "#fbbc05";
                 }
                 else {
-                  ctx.fillStyle = "gray";
+                  ctx.fillStyle = "#bdbdbd";
                 }
 
                 ctx.fill();
